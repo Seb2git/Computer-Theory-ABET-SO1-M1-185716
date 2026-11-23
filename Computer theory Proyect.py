@@ -17,14 +17,15 @@ def tokenize(text):
                     token_type = tokens.append((token_type, value))
 
 rules = [
-    ("ID", r"[a-zA-Z_][a-zA-Z0-9_]*"),
-    ("NUM", r"[0-9]+"),
+    ("ID"     , r"[a-zA-Z_][a-zA-Z0-9_]*"),
+    ("NUM"    , r"[0-9]+"),
     ("LESS_EQ", r"<="),
-    ("ASSIGN", r"="),
-    ("PLUS", r"\+"),
+    ("ASSIGN" , r"="),
+    ("PLUS"   , r"\+"),
+    ("MINUS"  , r"\-"),
     ("SEMICOL", r""),
-    ("SPACE", r"\s+"),
-    ()
+    ("SPACE"  , r"\s+"),
+
     ]
 
 keywords = {
