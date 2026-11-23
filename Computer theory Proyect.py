@@ -12,7 +12,7 @@ def tokenize(text):
                 value = match.group()
                 
                 if token_type == "ID":
-                    token_type = keywords.get(value, "IDENTIFIER")
+                    token_type = keywords.get(value, "ID")
                 if token_type == "SPACE":
                     token_type = tokens.append((token_type, value))
 
@@ -34,19 +34,33 @@ rules = [
     ("MULTI"  , r"\*"),
     ("DIV"    , r"/"),
     
-    ("SEMICOL", r";"),
-    ("SPACE"  , r"\s+"),
-
+    ("AND"    , r"\&\z&"),
+    ("OR"     , r"\|\|"),
+    ("NOT"    , r"!"),
+    
+    ("OP_PAR" , r"\("),
+    ("CL_PAR" , r"\)"),
+    ("OP_BRAC", r"{"),
+    ("CL_BRAC", r"}"),
+    
+    ("COMMA"  , r"\,"),
+    ("DOT"    , r"\."),
+    ("SEMICOL", r"\;"),
+    ("SPACE"  , r"\s")
     ]
 
 keywords = {
     "int"  :"INT",
     "bool" :"BOOL",
-    "while":"WHILE",
-    "if"   :"IF",
-    "else" :"ELSE",
-    "print":"PRINT",
+    
     "true" :"TRUE",
     "false":"FALSE"
+    
+    "while":"WHILE",
+    
+    "if"   :"IF",
+    "else" :"ELSE",
+    
+    "print":"PRINT",
     }
 
