@@ -19,11 +19,22 @@ def tokenize(text):
 rules = [
     ("ID"     , r"[a-zA-Z_][a-zA-Z0-9_]*"),
     ("NUM"    , r"[0-9]+"),
-    ("LESS_EQ", r"<="),
+    
     ("ASSIGN" , r"="),
+    
+    ("EQUAL"  , r"=="),
+    ("LESS_TH", r"<"),
+    ("MORE_TH", r">"),
+    ("LESS_EQ", r"<="),
+    ("MORE_EQ", r">="),
+    ("UNEQUAL", r"!="),
+    
     ("PLUS"   , r"\+"),
     ("MINUS"  , r"\-"),
-    ("SEMICOL", r""),
+    ("MULTI"  , r"\*"),
+    ("DIV"    , r"/"),
+    
+    ("SEMICOL", r";"),
     ("SPACE"  , r"\s+"),
 
     ]
