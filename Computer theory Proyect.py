@@ -13,7 +13,59 @@ def tokenize(text):
                 
                 if token_type == "ID":
                     token_type = keywords.get(value, "ID")
-                if token_type == "SPACE":
+                if token_type == "NUM":
+                    token_type = keywords.get(value, "NUM")
+                
+                if token_type == "ASSIGN":
+                    token_type = keywords.get(value, "ASSIGN")
+                
+                if token_type == "EQUAL":
+                    token_type = keywords.get(value, "COMPARISON")
+                if token_type == "LESS_TH":
+                    token_type = keywords.get(value, "COMPARISON")
+                if token_type == "MORE_TH":
+                    token_type = keywords.get(value, "COMPARISON")
+                if token_type == "LESS_EQ":
+                    token_type = keywords.get(value, "COMPARISON")
+                if token_type == "MORE_EQ":
+                    token_type = keywords.get(value, "COMPARISON")
+                if token_type == "UNEQUAL":
+                    token_type = keywords.get(value, "COMPARISON")
+                    
+                if token_type == "PLUS":
+                    token_type = keywords.get(value, "EQUATION")
+                if token_type == "MINUS":
+                    token_type = keywords.get(value, "EQUATION")
+                if token_type == "MULTI":
+                    token_type = keywords.get(value, "EQUATION")
+                if token_type == "DIV":
+                    token_type = keywords.get(value, "EQUATION")
+                    
+                if token_type == "AND":
+                    token_type = keywords.get(value, "LOGICAL")
+                if token_type == "OR":
+                    token_type = keywords.get(value, "LOGICAL")
+                if token_type == "NOT":
+                    token_type = keywords.get(value, "LOGICAL")
+                    
+                if token_type == "OP_PAR":
+                    token_type = keywords.get(value, "OP_PAR")
+                if token_type == "CL_PAR":
+                    token_type = keywords.get(value, "CL_PAR")
+                if token_type == "OP_BRAC":
+                    token_type = keywords.get(value, "OP_BRAC")
+                if token_type == "CL_BRAC":
+                    token_type = keywords.get(value, "CL_BRAC")
+                    
+                    
+                if token_type == "COMMA":
+                    token_type = keywords.get(value, "COMMA")
+                if token_type == "DOT":
+                    token_type = keywords.get(value, "DOT")
+                if token_type == "SEMICOL":
+                    token_type = keywords.get(value, "SEMICOL")
+                    
+                if token_type != "SPACE":
                     token_type = tokens.append((token_type, value))
 
 rules = [
@@ -54,7 +106,7 @@ keywords = {
     "bool" :"BOOL",
     
     "true" :"TRUE",
-    "false":"FALSE"
+    "false":"FALSE",
     
     "while":"WHILE",
     
@@ -63,4 +115,7 @@ keywords = {
     
     "print":"PRINT",
     }
+
+def parse_assignment(tokens):
+    expected = ["ID","ASSIGN","NUM","SEMICOL"]
 
