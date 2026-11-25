@@ -1,5 +1,19 @@
 import regex
 
+keywords = {
+    "int"  :"INT",
+    "bool" :"BOOL",
+    
+    "true" :"TRUE",
+    "false":"FALSE",
+    
+    "while":"WHILE",
+    
+    "if"   :"IF",
+    "else" :"ELSE",
+    
+    "print":"PRINT",
+    }
 
 rules = [
     ("ID"     , r"[a-zA-Z_][a-zA-Z0-9_]*"),
@@ -31,23 +45,7 @@ rules = [
     ("COMMA"  , r"\,"),
     ("DOT"    , r"\."),
     ("SEMICOL", r"\;"),
-    ("SPACE"  , r"\s")
-    ]
-
-keywords = {
-    "int"  :"INT",
-    "bool" :"BOOL",
-    
-    "true" :"TRUE",
-    "false":"FALSE",
-    
-    "while":"WHILE",
-    
-    "if"   :"IF",
-    "else" :"ELSE",
-    
-    "print":"PRINT",
-    }
+    ("SPACE"  , r"\s")]
 
 def tokenize(text):
     tokens   = []
@@ -99,27 +97,40 @@ def tokenize(text):
                         print("error en "+str(position))
                         position = position + 1
                         break
-                    token_type = tokens.append((token_type, value))
+                    tokens.append((token_type, value))
                     position = position + len(value)
                     break
                     
     return(tokens)
 
-
 def parse_assignment(tokens):
-    expected = ["ID","ASSIGN","NUM","SEMICOL"]
+    expected = [
+        ["ID","ASSIGN","NUM","SEMICOL"],
+        []
+        
+        ]
 
     actual = [token[0] for token in tokens]
-    
-    if actual != expected:
-        raise SyntaxError("Invalid assignment")
-    return {"node":"Assignment",
-            "target":tokens[0][1],
-            "value":{
-                "node":"IntegerLiteral",
-                "value":int(tokens[2][1])}}
+    for expect in expected:
+        if actual != expect:
+            raise SyntaxError("Invalid assignment")
+        return {"node":"Assignment",
+                "target":tokens[0][1],
+                "value":{
+                    "node":"IntegerLiteral",
+                    "value":int(tokens[2][1])}}
 
 
-
-print(tokenize("|| hola, buenas tardes 123 < 3 TRUE &&"))
+testtext = "x =13;" #borrar cuando se prepare el parse_assignment para el segundo test
+"""
+int x,y;
+x = 13;
+a = 12;
+if (true && x > a || !false){
+    print(a)
+    }}
+"""
+testToknz = (tokenize(testtext))
+print(testToknz)
+print(parse_assignment(testToknz))
 
